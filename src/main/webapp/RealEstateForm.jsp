@@ -213,7 +213,7 @@ font-weight:bold;
   
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-          <h5 class="profile">Cesar Paredes --- Software Engineer</h5>
+          <h5 class="profile">$Cesar Paredes ["Software Developer"]</h5>
           
           <!-- Linkedin -->
 			<i class="fab fa-linkedin-in"></i>

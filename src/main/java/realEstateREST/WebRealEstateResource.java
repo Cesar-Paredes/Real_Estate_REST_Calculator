@@ -41,10 +41,10 @@ public class WebRealEstateResource {
 		  rental.setAmortizationPeriod(amortizationPeriod);	
 		  rental.setMonthlyRentProfit(monthlyRentProfit);//sets how much over the mortgage monthly payments i want to rent out 
 		  
-		  rental.setMortgagePayments();//it will set the mortgage payment you need to pay to the bank
-		  rental.setMonthlyRent();//what the tenant would pay
-		  rental.setGrossRentalIncome();//it will calculate the gross rental income
-		  rental.setNetRentalIncome();
+		  rental.setMonthlyMortgagePayments();//it will set the mortgage payment you need to pay to the bank
+		  rental.setMonthlyRentTenantPay();//what the tenant would pay
+		  rental.setGrossAnnualRentalIncome();//it will calculate the gross rental income
+		  rental.setAnnualNetRentalIncome();
 		  
 		  
 		  
@@ -54,11 +54,11 @@ public class WebRealEstateResource {
 				  
 				  
 		  "Your down payment is: $"  + rental.getDownPayment()+ ". That is " + rental.downPaymentPercentage()+"%" + "\n" +
-		  "Your mortgage monthly payments would be: $" + rental.getMortgagePayments()+ "\n" +
-		  "Our mortgage payments per year: $" + (rental.getMortgagePayments()*12) + "\n" +
-		  "We would rent it to tenants monthly for  $" + rental.getMonthlyRent()  + "\n" +
-		  "Our gross rental annual income would be: $" + rental.getGrossRentalIncome() + "\n" +
-		  "Our profits per year for this property: $" +  rental.getNetRentalIncome();
+		  "Your mortgage monthly payments would be: $" + rental.getMortgageAnnualPayments()+ "\n" +
+		  "Our mortgage payments per year: $" + (rental.getMortgageAnnualPayments()*12) + "\n" +
+		  "We would rent it to tenants monthly for  $" + rental.getMonthlyRentTenantPay()  + "\n" +
+		  "Our gross rental annual income would be: $" + rental.getGrossAnnualRentalIncome() + "\n" +
+		  "Our profits per year for this property: $" +  rental.getAnnualNetRentalIncome();
 		 
 		 		  
 	}
@@ -83,15 +83,15 @@ public class WebRealEstateResource {
 		  rental.setAmortizationPeriod(amortizationPeriod);	
 		  rental.setMonthlyRentProfit(monthlyRentProfit);//sets how much over the mortgage monthly payments i want to rent out 
 		  
-		  rental.setMortgagePayments();//it will set the mortgage payment you need to pay to the bank
-		  rental.setMonthlyRent();//what the tenant would pay
-		  rental.setGrossRentalIncome();//it will calculate the gross rental income
-		  rental.setNetRentalIncome();
+		  rental.setMonthlyMortgagePayments();//it will set the mortgage payment you need to pay to the bank
+		  rental.setMonthlyRentTenantPay();//what the tenant would pay
+		  rental.setGrossAnnualRentalIncome();//it will calculate the gross rental income
+		  rental.setAnnualNetRentalIncome();
+		  rental.setMortgageAnnualPayments();
 		  
+		  //if purchasePrice is left blank, it would be 0 and we would set up an error message to the user
 		  if(purchasePrice<=0) {
-			  
-			  
-			  
+			    
 			  return 
 					  "<!DOCTYPE html>\r\n"
 					  + "<html>\r\n"
@@ -119,7 +119,7 @@ public class WebRealEstateResource {
 					  + "\r\n"
 					  + "\r\n"		
 					  
-					  
+					  //CSS
 					  + "<!--  this is the style CSS  -->\r\n"
 					  + "<style>\r\n"
 					  + "	.divider:after,\r\n"
@@ -288,7 +288,7 @@ public class WebRealEstateResource {
 					  + "  \r\n"
 					  + "        <!--Grid column-->\r\n"
 					  + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
-					  + "          <h5 class=\"profile\">Cesar Paredes --- Software Engineer</h5>\r\n"
+					  + "          <h5 class=\"profile\">Cesar Paredes --- Software Developer</h5>\r\n"
 					  + "          \r\n"
 					  + "          <!-- Linkedin -->\r\n"
 					  + "			<i class=\"fab fa-linkedin-in\"></i>\r\n"
@@ -350,6 +350,8 @@ public class WebRealEstateResource {
 					  
 			  
 		  }
+		  
+		  
 		  
 		  
 		  
@@ -513,13 +515,13 @@ public class WebRealEstateResource {
 				 
 				 + "            <ul class=\"list-group\">\r\n"
 				 + "              <p style=\"font-weight: 900;\">Your payments: </p>\r\n"
-				 + "              <li class=\"list-group-item\">Mortgage monthly payments: $" +  Math.round(rental.getMortgagePayments())  + "</li>\r\n"
-				 + "              <li class=\"list-group-item\">Mortgage annual payments: $"  +  Math.round(rental.getMortgagePayments())* 12 +  " </li>\r\n"
+				 + "              <li class=\"list-group-item\">Mortgage monthly payments: $" +  Math.round(rental.getMonthlyMortgagePayments())  + "</li>\r\n"
+				 + "              <li class=\"list-group-item\">Mortgage annual payments: $"  +  Math.round(rental.getMortgageAnnualPayments()) +  " </li>\r\n"
 				 + "              <br>\r\n"
 				 + "              <p style=\"font-weight: 900;\">Property rental price to achieve $" + rental.getMonthlyRentProfit()  + " net income per month</p>\r\n"
-				 + "              <li class=\"list-group-item\">Rent your property for: $" + Math.round(rental.getMonthlyRent()) +  "</li>\r\n"
-				 + "              <li class=\"list-group-item\">Your gross rental income would be: $" + Math.round(rental.getGrossRentalIncome()) + "</li>\r\n"
-				 + "               <li class=\"list-group-item\">Your annual net income would be: $" + Math.round(rental.getNetRentalIncome())  + " </li>\r\n"
+				 + "              <li class=\"list-group-item\">Rent your property for: $" + Math.round(rental.getMonthlyRentTenantPay()) +  "</li>\r\n"
+				 + "              <li class=\"list-group-item\">Your gross rental income would be: $" + Math.round(rental.getGrossAnnualRentalIncome()) + "</li>\r\n"
+				 + "               <li class=\"list-group-item\">Your annual net income would be: $" + Math.round(rental.getAnnualNetRentalIncome())  + " </li>\r\n"
 				 + "            </ul>\r\n"
 				 + "            <div>\r\n"
 				 + "          \r\n"
@@ -566,7 +568,7 @@ public class WebRealEstateResource {
 				 + "  \r\n"
 				 + "        <!--Grid column-->\r\n"
 				 + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
-				 + "          <h5 class=\"profile\">Cesar Paredes --- Software Engineer</h5>\r\n"
+				 + "          <h5 class=\"profile\">Cesar Paredes --- Software Developer</h5>\r\n"
 				 + "          \r\n"
 				 + "          <!-- Linkedin -->\r\n"
 				 + "			<i class=\"fab fa-linkedin-in\"></i>\r\n"
