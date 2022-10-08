@@ -76,6 +76,12 @@ public class Rental {
     }
 
     public double getMortgagePayments() {
+    	
+    	//when some values are 0, mortgage payments might return a Nan
+        if(Double.isNaN(this.mortgagePayments)){
+            this.mortgagePayments = 0;
+        }
+        
         return mortgagePayments;
     }
 
@@ -85,6 +91,11 @@ public class Rental {
 
         this.mortgagePayments =  ((getPurchasePrice()-getDownPayment())* (( (getInterestRate()/100) /12 )*(Math.pow( 1 + ((getInterestRate()/100)/12 ), getAmortizationPeriod()) ) ) )/
                 ( (Math.pow( 1 + ((getInterestRate()/100)/12 ), getAmortizationPeriod()) ) -1 ) ;
+        
+      //when some values are 0, mortgage payments might return a Nan
+        if(Double.isNaN(this.mortgagePayments)){
+            this.mortgagePayments = 0;
+        }
     }
 
     public double getNetRentalIncome() {
