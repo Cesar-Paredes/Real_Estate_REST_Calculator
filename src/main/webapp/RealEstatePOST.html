@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<p>This help us keep our database updated</p>
+<p>Thank you for putting your annual property tax according to your area! </p>
+<p>Write Montreal West, Montreal East, Montreal North, Vaudreuil or Laval areas </p>
+<!-- this is the path where the form will be sending its input data, this url path will
+display the output of out form below -->
+<form method="post" action="/RealEstateREST/rest/WebRealEstate/annualTaxesCreate">
+
+
+<!-- THIS IS THE FORM -->
+
+<!-- <!-- TO ACCESS THIS FORM: http://localhost:8080/RealEstateREST/RealEstateUPDATE.html -->
+
+<label> Location: <input type="text" size="20" name="location"></label><br/>
+<label> Annual Taxes: <input type="text" size="20" name="annualTaxes"></label><br/>
+
+
+
+<!-- this is adding buttons-->
+<input type="submit" name="btnSubmit" value="Submit Info"/>
+<input type="reset" name="btbCancel" value="Cancel"/>
+</form>
+
+
+
+</body>
+</html>

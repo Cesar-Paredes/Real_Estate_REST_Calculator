@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+    
+    <!-- this is end-point with its attributes -->
+    <endpoint
+    	name="WebRealEstateService"
+    	implementation="realEstateSOAP.WebRealEstateService"
+    	url-pattern="/ws/WebRealEstateService"
+    />    <!-- or can write </endpoint>... this close the end-point , this is XML, similar to HTML  -->
+    
+</endpoints>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- this is the path where the form will be sending its input data, this url path will
+display the output of out form below -->
+<form method="get" action="/RealEstateREST/rest/WebRealEstate/rent">
+
+
+<!-- THIS IS THE FORM -->
+
+<!-- TO ACCESS THIS FORM: http://localhost:8080/RealEstateREST/RealEstateREST.html
+ --><!-- this is the id from the variable in the QueryParam , the id is Name and Year-->
+<label> Purchase Price: <input type="text" size="20" name="purchasePrice"></label><br/>
+<label> Down-payment: <input type="text" size="20" name="downPayment"></label><br/>
+<label> Interest Rate: <input type="text" size="20" name="interestRate"></label><br/>
+<label> Amortization Period(months): <input type="text" size="20" name="amortizationPeriod"></label><br/>
+<label> Expected Monthly Profits(from rent): <input type="text" size="20" name="monthlyRentProfit"></label><br/>
+
+
+
+<!-- this is adding buttons-->
+<input type="submit" name="btnSubmit" value="Submit Info"/>
+<input type="reset" name="btbCancel" value="Cancel"/>
+</form>
+
+
+</body>
+</html>
