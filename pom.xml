@@ -22,6 +22,9 @@
     <version>3.0.3</version>
 	</dependency> 
 	
+	
+	
+	
 	<!-- this is a dependency for the SOAP app in pom.xml -->
 	<dependency>
     <groupId>com.sun.xml.ws</groupId>
@@ -47,6 +50,19 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.3</version>
       </plugin>
+      
+      
+      <!--  added for maven also-->
+  <!--     <plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>exec-maven-plugin</artifactId>
+		<version>1.6.0</version>
+		<configuration>
+			<mainClass>realEstateREST.WebRealEstateResource</mainClass>
+		</configuration>
+	</plugin> -->
+      
+      
     </plugins>
   </build>
 </project>
