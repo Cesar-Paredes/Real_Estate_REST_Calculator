@@ -10,7 +10,7 @@ Back-end: Maven project with REST architecture and Java Jersey.<br/>
 <br/>
 This app was deployed locally using a Payara glassfish server 6 (6.2.3)<br/>
 
-<br/>
+
 ![image](https://user-images.githubusercontent.com/35407350/195676684-5ac0e612-abde-4b8a-bedd-793d7d6fa26c.png)
 
 <br/>
