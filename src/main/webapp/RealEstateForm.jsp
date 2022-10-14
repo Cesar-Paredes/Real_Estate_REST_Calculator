@@ -73,7 +73,6 @@ font-size:15px;}
 /* form button "calculate profit"  */
 .btn-lg{
   font-size: 20px;
- 
 }
 
 
@@ -198,15 +197,32 @@ font-weight:bold;
           <h5 class="text-uppercase mb-4">About my Web application :)</h5>
   
           <p>
-            Hello and I hope you are having fun looking at this calculator :)
-             
-            
+           Hello, and I hope you are having fun looking at this calculator :)         
           </p>
-  
+          
+          <h3>System environment:</h3>
+         
+          <p>        	
+          	I used Digital Ocean for my hosting services, unfortunately, they don't have the auto-deploy option for Java web apps so I had to do everything myself from the Ubuntu console which was great because 
+          	I had the chance to practice my Linux skills :)
+          </p>
+          
+          
           <p>
-            Details:<br>
-            The form data is sent to my HTTP endpoint, this HTTP GET method connects to my Java class, all calculations are done in that class. Then the HTTP GET method fetch the final results from my Java Class and return them back to the client in the form of HTML.
+            More details:<br>
+            The form data is sent to my HTTP endpoint, this HTTP GET method 
+            connects to my Java class, and all calculations are done in that class. 
+            Then the HTTP GET method fetches the final results from my Java Class and returns them to the client 
+            in the form of HTML.
           </p>
+         
+          	
+          	
+          	
+          	          	
+          	
+          	
+          
   
         </div>
         <!--Grid column-->
@@ -228,7 +244,7 @@ font-weight:bold;
               <a href="https://www.linkedin.com/in/cesarparedes1/" target="_blank" class="text-white">LinkedIn</a>
             </li>
             <li class="mb-3">
-              <a href="https://github.com/Cesar-Paredes" target="_blank" style="color:orange">CODE for this Web App</a>
+              <a href="https://github.com/Cesar-Paredes/Real_Estate_REST_Calculator" target="_blank" style="color:orange">CODE for this Web App</a>
             </li>
             
             
@@ -244,16 +260,29 @@ font-weight:bold;
             <tbody class="font-weight-normal">
               <tr>
                 <td>Back-End:</td>
-                <td>REST architecture with JAVA JERSEY</td>
+                <td>REST architecture, JAVA JERSEY, Linux Ubuntu OS</td>
               </tr>
               <tr>
                 <td>Front-End</td>
                 <td>HTML, CSS, Bootstrap and JS</td>
               </tr>
-              
-            </tbody>
+            </tbody>     
           </table>
+          
+           <h3>Steps on the server Ubuntu console command line:</h3>
+          <ul>
+          	        	
+          	<li><p>Set up the Java environment by installing JDK and JRE 11.</p></li>
+          	<li><p>Install maven.</p></li>
+          	<li><p>Clone the Payara glassfish server  6 (6.2.3) using Git commands.</p></li>
+          	<li><p>Execute a maven build.</p></li>
+          	<li><p>Use Payara glassfish to deploy my project.</p></li>
+                 
+          </ul>
+          
+          
         </div>
+        
         <!--Grid column-->
       </div>
       <!--Grid row-->
@@ -262,7 +291,7 @@ font-weight:bold;
   
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2022 Copyright
+      © 2022 Copyright - Cesar Paredes
       
     </div>
     <!-- Copyright -->

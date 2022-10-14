@@ -5,7 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
-  <!--   added-->  
+  
+  
+  
+  
+  <!--   added dependencies-->  
 
 	<dependencies>
 	
@@ -21,6 +25,8 @@
     <artifactId>jersey-hk2</artifactId>
     <version>3.0.3</version>
 	</dependency> 
+	
+	
 	
 	
 	
@@ -43,13 +49,39 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>15</release>
+          <release>11</release>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.3</version>
       </plugin>
+      
+      
+      <!-- maven plugins for encoding-->
+      
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-resources-plugin</artifactId>
+	<version>3.2.0</version>
+	<configuration>
+		<propertiesEncoding>UTF-8</propertiesEncoding>
+	</configuration>
+	</plugin>	
+      		
+      
+      
+      
+    <!--   <plugin>
+      <configuration>
+    	<encoding>UTF-8</encoding>
+    	<propertiesEncoding>UTF-8</propertiesEncoding>
+	</configuration>
+    
+      </plugin> -->
+    
+      
+    
       
       
       <!--  added for maven also-->

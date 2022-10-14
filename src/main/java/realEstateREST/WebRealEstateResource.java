@@ -1,5 +1,8 @@
 package realEstateREST;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -14,56 +17,7 @@ import jakarta.ws.rs.core.MediaType;
 public class WebRealEstateResource {
 	
 	
-	
-	
-	
-	//this method will calculate how much return you can get from your rental property
-	
-	//im using get because im not updating, or adding anything to the database
-	//im just using the information from the user and return it.
-	@GET
-	@Path("/rent")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String rentalProperty(
-			@QueryParam("purchasePrice") double purchasePrice, 
-			@QueryParam("downPayment") double downPayment,
-			@QueryParam("interestRate") double interestRate,
-			@QueryParam("amortizationPeriod") double amortizationPeriod,
-			@QueryParam("monthlyRentProfit") double monthlyRentProfit){
-		
-		Rental rental = new Rental();
-
-	
-		
-		  rental.setPurchasePrice(purchasePrice);
-		  rental.setDownPayment(downPayment);
-		  rental.setInterestRate(interestRate);
-		  rental.setAmortizationPeriod(amortizationPeriod);	
-		  rental.setMonthlyRentProfit(monthlyRentProfit);//sets how much over the mortgage monthly payments i want to rent out 
-		  
-		  rental.setMonthlyMortgagePayments();//it will set the mortgage payment you need to pay to the bank
-		  rental.setMonthlyRentTenantPay();//what the tenant would pay
-		  rental.setGrossAnnualRentalIncome();//it will calculate the gross rental income
-		  rental.setAnnualNetRentalIncome();
-		  
-		  
-		  
-	  
-		  return 
-				  
-				  
-				  
-		  "Your down payment is: $"  + rental.getDownPayment()+ ". That is " + rental.downPaymentPercentage()+"%" + "\n" +
-		  "Your mortgage monthly payments would be: $" + rental.getMortgageAnnualPayments()+ "\n" +
-		  "Our mortgage payments per year: $" + (rental.getMortgageAnnualPayments()*12) + "\n" +
-		  "We would rent it to tenants monthly for  $" + rental.getMonthlyRentTenantPay()  + "\n" +
-		  "Our gross rental annual income would be: $" + rental.getGrossAnnualRentalIncome() + "\n" +
-		  "Our profits per year for this property: $" +  rental.getAnnualNetRentalIncome();
-		 
-		 		  
-	}
-	
-	//same as above but this one will return the values in HTML
+	//return the values in HTML
 	//it will display a form with our values.
 	@GET
 	@Path("/rent2")
@@ -92,7 +46,7 @@ public class WebRealEstateResource {
 		  //if purchasePrice is left blank, it would be 0 and we would set up an error message to the user
 		  if(purchasePrice<=0) {
 			    
-			  return 
+			  String rawString =  
 					  "<!DOCTYPE html>\r\n"
 					  + "<html>\r\n"
 					  + "<head>\r\n"
@@ -272,23 +226,32 @@ public class WebRealEstateResource {
 					  + "        <div class=\"col-lg-4 col-md-12 mb-4 mb-md-0\">\r\n"
 					  + "          <h5 class=\"text-uppercase mb-4\">About my Web application :)</h5>\r\n"
 					  + "  \r\n"
-					  + "          <p>\r\n"
-					  + "            Hello and I hope you are having fun looking at this calculator :)\r\n"
-					  + "            \r\n"
+					  + " <p>\r\n"
+					  + "           Hello, and I hope you are having fun looking at this calculator :)         \r\n"
 					  + "          </p>\r\n"
-					  + "  \r\n"
-					  + "          <p>\r\n"
-					  + "            More details:\r\n"
-					  + "            The form data is sent to my HTTP endpoint, this HTTP GET method connects to my Java class, all calculations are done in that class. Then the HTTP GET method fetch the final results from my Java Class and return them back to the client in the form of HTML.\r\n"
-					  + "\r\n"
+					  + "          \r\n"
+					  + "          <p>System environment:</p>\r\n"
+					  + "         \r\n"
+					  + "          <p>        	\r\n"
+					  + "          	I used Digital Ocean for my hosting services, unfortunately, they don't have the auto-deploy option for Java web apps so I had to do everything myself from the Ubuntu console which was great because \r\n"
+					  + "          	I had the chance to practice my Linux skills :)\r\n"
 					  + "          </p>\r\n"
+					  + "          \r\n"
+					  + "          \r\n"
+					  + "          <p>\r\n"
+					  + "            Details:<br>\r\n"
+					  + "            The form data is sent to my HTTP endpoint, this HTTP GET method \r\n"
+					  + "            connects to my Java class, and all calculations are done in that class. \r\n"
+					  + "            Then the HTTP GET method fetches the final results from my Java Class and returns them to the client \r\n"
+					  + "            in the form of HTML.\r\n"
+					  + "          </p>"
 					  + "  \r\n"
 					  + "        </div>\r\n"
 					  + "        <!--Grid column-->\r\n"
 					  + "  \r\n"
 					  + "        <!--Grid column-->\r\n"
 					  + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
-					  + "          <h5 class=\"profile\">Cesar Paredes --- Software Developer</h5>\r\n"
+					  + "          <h5 class=\"profile\">$Cesar Paredes [\"Software Developer\"]</h5>\r\n"
 					  + "          \r\n"
 					  + "          <!-- Linkedin -->\r\n"
 					  + "			<i class=\"fab fa-linkedin-in\"></i>\r\n"
@@ -304,7 +267,7 @@ public class WebRealEstateResource {
 					  + "            </li>\r\n"
 					  + "            \r\n"
 					  + " 			<li class=\"mb-3\">\r\n"
-					  + "              <a href=\"https://github.com/Cesar-Paredes\" target=\"_blank\" style=\"color:orange\">CODE for this Web App</a>\r\n"
+					  + "              <a href=\"https://github.com/Cesar-Paredes/Real_Estate_REST_Calculator\" target=\"_blank\" style=\"color:orange\">CODE for this Web App</a>\r\n"
 					  + "            </li>"
 					  + "            \r\n"
 					  + "          </ul>\r\n"
@@ -312,23 +275,35 @@ public class WebRealEstateResource {
 					  + "        <!--Grid column-->\r\n"
 					  + "  \r\n"
 					  + "        <!--Grid column-->\r\n"
-					  + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
+					  + "<div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
 					  + "          <h5 class=\"text-uppercase mb-4\">Languages used in this web app</h5>\r\n"
 					  + "  \r\n"
 					  + "          <table class=\"table text-center text-white\">\r\n"
 					  + "            <tbody class=\"font-weight-normal\">\r\n"
 					  + "              <tr>\r\n"
 					  + "                <td>Back-End:</td>\r\n"
-					  + "                <td>REST architecture with JAVA JERSEY</td>\r\n"
+					  + "                <td>REST architecture, JAVA JERSEY, Linux Ubuntu OS</td>\r\n"
 					  + "              </tr>\r\n"
 					  + "              <tr>\r\n"
 					  + "                <td>Front-End</td>\r\n"
-					  + "                <td>Bootstrap CSS, HTML and some JS</td>\r\n"
+					  + "                <td>HTML, CSS, Bootstrap and JS</td>\r\n"
 					  + "              </tr>\r\n"
-					  + "              \r\n"
-					  + "            </tbody>\r\n"
+					  + "            </tbody>     \r\n"
 					  + "          </table>\r\n"
-					  + "        </div>\r\n"
+					  + "          \r\n"
+					  + "           <h3>Steps on the server Ubuntu console command line:</h3>\r\n"
+					  + "          <ul>\r\n"
+					  + "          	        	\r\n"
+					  + "          	<li><p>Set up the Java environment by installing JDK and JRE 11.</p></li>\r\n"
+					  + "          	<li><p>Install maven.</p></li>\r\n"
+					  + "          	<li><p>Clone the Payara glassfish server  6 (6.2.3) using Git commands.</p></li>\r\n"
+					  + "          	<li><p>Execute a maven build.</p></li>\r\n"
+					  + "          	<li><p>Use Payara glassfish to deploy my project.</p></li>\r\n"
+					  + "                 \r\n"
+					  + "          </ul>\r\n"
+					  + "          \r\n"
+					  + "          \r\n"
+					  + "        </div>"
 					  + "        <!--Grid column-->\r\n"
 					  + "      </div>\r\n"
 					  + "      <!--Grid row-->\r\n"
@@ -337,7 +312,7 @@ public class WebRealEstateResource {
 					  + "  \r\n"
 					  + "    <!-- Copyright -->\r\n"
 					  + "    <div class=\"text-center p-3\" style=\"background-color: rgba(0, 0, 0, 0.2);\">\r\n"
-					  + "      © 2022 Copyright\r\n"
+					  + "      © 2022 Copyright - Cesar Paredes\r\n"
 					  + "      \r\n"
 					  + "    </div>\r\n"
 					  + "    <!-- Copyright -->\r\n"
@@ -347,16 +322,16 @@ public class WebRealEstateResource {
 					  + "\r\n"
 					  + "\r\n"
 					  + "</html>";
-					  
+			  
+			  ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString); 
+			  String utf8EncodedString = StandardCharsets.UTF_8.decode(buffer).toString();
+			  
+			  return utf8EncodedString;
 			  
 		  }
 		  
-		  
-		  
-		  
-		  
 	  
-		  return 
+		  String rawString =  
 				 "<!DOCTYPE html>\r\n"
 				 + "<html>\r\n"
 				 + "<head>\r\n"
@@ -542,166 +517,122 @@ public class WebRealEstateResource {
 				 + "\r\n"
 				 + "</body>\r\n"
 				 + "\r\n"
-				 + "<!--  footer -->\r\n"
-				 + "\r\n"
-				 + "<footer class=\"text-white text-center text-lg-start bg-primary\">\r\n"
-				 + "    <!-- Grid container -->\r\n"
-				 + "    <div class=\"container p-4\">\r\n"
-				 + "      <!--Grid row-->\r\n"
-				 + "      <div class=\"row mt-4\">\r\n"
-				 + "        <!--Grid column-->\r\n"
-				 + "        <div class=\"col-lg-4 col-md-12 mb-4 mb-md-0\">\r\n"
-				 + "          <h5 class=\"text-uppercase mb-4\">About my Web application :)</h5>\r\n"
-				 + "  \r\n"
-				 + "          <p>\r\n"
-				 + "            Hello and I hope you are having fun looking at this calculator :)\r\n"       
-				 + "          </p>\r\n"
-				 + "  \r\n"
-				 + "          <p>\r\n"
-				 + "            Details:\r\n"
-				 + "            The form data is sent to my HTTP endpoint, this HTTP GET method connects to my Java class, all calculations are done in that class. Then the HTTP GET method fetch the final results from my Java Class and return them back to the client in the form of HTML.\r\n"
-				 + ".\r\n"
-				 + "          </p>\r\n"
-				 + "  \r\n"
-				 + "        </div>\r\n"
-				 + "        <!--Grid column-->\r\n"
-				 + "  \r\n"
-				 + "        <!--Grid column-->\r\n"
-				 + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
-				 + "          <h5 class=\"profile\">Cesar Paredes --- Software Developer</h5>\r\n"
-				 + "          \r\n"
-				 + "          <!-- Linkedin -->\r\n"
-				 + "			<i class=\"fab fa-linkedin-in\"></i>\r\n"
-				 + "  \r\n"
-				 + "          \r\n"
-				 + "  \r\n"
-				 + "          <ul class=\"fa-ul\" style=\"margin-left: 1.65em;\">\r\n"
-				 + "          <li class=\"mb-3\">\r\n"
-				 + "              <a href=\"https://github.com/Cesar-Paredes\" target=\"_blank\" class=\"link-dark\">GitHub</a>\r\n"
-				 + "            </li>\r\n"
-				 + "            <li class=\"mb-3\">\r\n"
-				 + "              <a href=\"https://www.linkedin.com/in/cesarparedes1/\" target=\"_blank\" class=\"text-white\">LinkedIn</a>\r\n"
-				 + "            </li>\r\n"
-				 + "            \r\n"
-				 + " 			<li class=\"mb-3\">\r\n"
-				 + "              <a href=\"https://github.com/Cesar-Paredes\" target=\"_blank\" style=\"color:orange\">CODE for this Web App</a>\r\n"
-				 + "            </li>"
-				 + "            \r\n"
-				 + "          </ul>\r\n"
-				 + "        </div>\r\n"
-				 + "        <!--Grid column-->\r\n"
-				 + "  \r\n"
-				 + "        <!--Grid column-->\r\n"
-				 + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
-				 + "          <h5 class=\"text-uppercase mb-4\">Languages used in this web app</h5>\r\n"
-				 + "  \r\n"
-				 + "          <table class=\"table text-center text-white\">\r\n"
-				 + "            <tbody class=\"font-weight-normal\">\r\n"
-				 + "              <tr>\r\n"
-				 + "                <td>Back-End:</td>\r\n"
-				 + "                <td>REST architecture with JAVA JERSEY</td>\r\n"
-				 + "              </tr>\r\n"
-				 + "              <tr>\r\n"
-				 + "                <td>Front-End</td>\r\n"
-				 + "                <td>Bootstrap CSS, HTML and some JS</td>\r\n"
-				 + "              </tr>\r\n"
-				 + "              \r\n"
-				 + "            </tbody>\r\n"
-				 + "          </table>\r\n"
-				 + "        </div>\r\n"
-				 + "        <!--Grid column-->\r\n"
-				 + "      </div>\r\n"
-				 + "      <!--Grid row-->\r\n"
-				 + "    </div>\r\n"
-				 + "    <!-- Grid container -->\r\n"
-				 + "  \r\n"
-				 + "    <!-- Copyright -->\r\n"
-				 + "    <div class=\"text-center p-3\" style=\"background-color: rgba(0, 0, 0, 0.2);\">\r\n"
-				 + "      © 2022 Copyright\r\n"
-				 + "      \r\n"
-				 + "    </div>\r\n"
-				 + "    <!-- Copyright -->\r\n"
-				 + "  </footer>\r\n"
-				 + "  \r\n"
-				 + "</html>";
+				  + "<!--  footer -->\r\n"
+				  + "\r\n"
+				  + "<footer class=\"text-white text-center text-lg-start bg-primary\">\r\n"
+				  + "    <!-- Grid container -->\r\n"
+				  + "    <div class=\"container p-4\">\r\n"
+				  + "      <!--Grid row-->\r\n"
+				  + "      <div class=\"row mt-4\">\r\n"
+				  + "        <!--Grid column-->\r\n"
+				  + "        <div class=\"col-lg-4 col-md-12 mb-4 mb-md-0\">\r\n"
+				  + "          <h5 class=\"text-uppercase mb-4\">About my Web application :)</h5>\r\n"
+				  + "  \r\n"
+				  + " <p>\r\n"
+				  + "           Hello, and I hope you are having fun looking at this calculator :)         \r\n"
+				  + "          </p>\r\n"
+				  + "          \r\n"
+				  + "          <p>System environment:</p>\r\n"
+				  + "         \r\n"
+				  + "          <p>        	\r\n"
+				  + "          	I used Digital Ocean for my hosting services, unfortunately, they don't have the auto-deploy option for Java web apps so I had to do everything myself from the Ubuntu console which was great because \r\n"
+				  + "          	I had the chance to practice my Linux skills :)\r\n"
+				  + "          </p>\r\n"
+				  + "          \r\n"
+				  + "          \r\n"
+				  + "          <p>\r\n"
+				  + "            Details:<br>\r\n"
+				  + "            The form data is sent to my HTTP endpoint, this HTTP GET method \r\n"
+				  + "            connects to my Java class, and all calculations are done in that class. \r\n"
+				  + "            Then the HTTP GET method fetches the final results from my Java Class and returns them to the client \r\n"
+				  + "            in the form of HTML.\r\n"
+				  + "          </p>"
+				  + "  \r\n"
+				  + "        </div>\r\n"
+				  + "        <!--Grid column-->\r\n"
+				  + "  \r\n"
+				  + "        <!--Grid column-->\r\n"
+				  + "        <div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
+				  + "          <h5 class=\"profile\">$Cesar Paredes [\"Software Developer\"]</h5>\r\n"
+				  + "          \r\n"
+				  + "          <!-- Linkedin -->\r\n"
+				  + "			<i class=\"fab fa-linkedin-in\"></i>\r\n"
+				  + "  \r\n"
+				  + "          \r\n"
+				  + "  \r\n"
+				  + "          <ul class=\"fa-ul\" style=\"margin-left: 1.65em;\">\r\n"
+				  + "          <li class=\"mb-3\">\r\n"
+				  + "              <a href=\"https://github.com/Cesar-Paredes\" target=\"_blank\" class=\"link-dark\">GitHub</a>\r\n"
+				  + "            </li>\r\n"
+				  + "            <li class=\"mb-3\">\r\n"
+				  + "              <a href=\"https://www.linkedin.com/in/cesarparedes1/\" target=\"_blank\" class=\"text-white\">LinkedIn</a>\r\n"
+				  + "            </li>\r\n"
+				  + "            \r\n"
+				  + " 			<li class=\"mb-3\">\r\n"
+				  + "              <a href=\"https://github.com/Cesar-Paredes/Real_Estate_REST_Calculator\" target=\"_blank\" style=\"color:orange\">CODE for this Web App</a>\r\n"
+				  + "            </li>"
+				  + "            \r\n"
+				  + "          </ul>\r\n"
+				  + "        </div>\r\n"
+				  + "        <!--Grid column-->\r\n"
+				  + "  \r\n"
+				  + "        <!--Grid column-->\r\n"
+				  + "<div class=\"col-lg-4 col-md-6 mb-4 mb-md-0\">\r\n"
+				  + "          <h5 class=\"text-uppercase mb-4\">Languages used in this web app</h5>\r\n"
+				  + "  \r\n"
+				  + "          <table class=\"table text-center text-white\">\r\n"
+				  + "            <tbody class=\"font-weight-normal\">\r\n"
+				  + "              <tr>\r\n"
+				  + "                <td>Back-End:</td>\r\n"
+				  + "                <td>REST architecture, JAVA JERSEY, Linux Ubuntu OS</td>\r\n"
+				  + "              </tr>\r\n"
+				  + "              <tr>\r\n"
+				  + "                <td>Front-End</td>\r\n"
+				  + "                <td>HTML, CSS, Bootstrap and JS</td>\r\n"
+				  + "              </tr>\r\n"
+				  + "            </tbody>     \r\n"
+				  + "          </table>\r\n"
+				  + "          \r\n"
+				  + "           <h3>Steps on the server Ubuntu console command line:</h3>\r\n"
+				  + "          <ul>\r\n"
+				  + "          	        	\r\n"
+				  + "          	<li><p>Set up the Java environment by installing JDK and JRE 11.</p></li>\r\n"
+				  + "          	<li><p>Install maven.</p></li>\r\n"
+				  + "          	<li><p>Clone the Payara glassfish server  6 (6.2.3) using Git commands.</p></li>\r\n"
+				  + "          	<li><p>Execute a maven build.</p></li>\r\n"
+				  + "          	<li><p>Use Payara glassfish to deploy my project.</p></li>\r\n"
+				  + "                 \r\n"
+				  + "          </ul>\r\n"
+				  + "          \r\n"
+				  + "          \r\n"
+				  + "        </div>"
+				  + "        <!--Grid column-->\r\n"
+				  + "      </div>\r\n"
+				  + "      <!--Grid row-->\r\n"
+				  + "    </div>\r\n"
+				  + "    <!-- Grid container -->\r\n"
+				  + "  \r\n"
+				  + "    <!-- Copyright -->\r\n"
+				  + "    <div class=\"text-center p-3\" style=\"background-color: rgba(0, 0, 0, 0.2);\">\r\n"
+				  + "      © 2022 Copyright - Cesar Paredes\r\n"
+				  + "      \r\n"
+				  + "    </div>\r\n"
+				  + "    <!-- Copyright -->\r\n"
+				  + "  </footer>\r\n"
+				  + "  \r\n"
+				  + "\r\n"
+				  + "\r\n"
+				  + "\r\n"
+				  + "</html>";
+		  
+		  ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString); 
+		  String utf8EncodedString = StandardCharsets.UTF_8.decode(buffer).toString();
+		  
+		  return utf8EncodedString;
 		 		  
 	}
 	
-	
-	
-	
-	
-//	
-	//this is a simple method that will tell you how much is you municipal property annual taxes
-	//in your area.
-	
-		@GET
-		@Path("annualTaxes/")
-		@Produces(MediaType.APPLICATION_JSON)
-		public String rentalProperty2(
-				@QueryParam("location") String location) {
-			
-			AnnualTaxes taxes = new AnnualTaxes();
-			
-			if(location.equalsIgnoreCase("montreal west" )) {
-				return "According to our database: " + location + " - $"+ taxes.getMontrealWest() + " annual property taxes.";
-			}
-			
-			else if(location.equalsIgnoreCase("montreal east" )) {
-				return   "According to our database: " + location + " - $" + taxes.getMontrealEast()+" annual property taxes.";
-			}
-				
-			else if(location.equalsIgnoreCase("montreal north" )) {
-				return  "According to our database: " + location + " - $" + taxes.getMontrealNorth()+" annual property taxes.";
-			}
-			else if(location.equalsIgnoreCase("vaudreuil" )) {
-				return  "According to our database: " + location + " - $" +  taxes.getVaudreuil()+" annual property taxes.";
-			}
-			
-			else if(location.equalsIgnoreCase("laval" )) {
-				return "According to our database: " + location + " - $" + taxes.getLaval()+" annual property taxes.";
-			}
-			
-			return "Your area was not found in our database, please try again!";			 		 
-		}
-		
-		
-		//this will let the user help us CREATE our annual tax database according to the area
-		@POST
-		@Path("annualTaxesCreate/")
-		@Produces(MediaType.APPLICATION_JSON)
-		public String rentalProperty3(
-				@FormParam("location") String location,
-				@FormParam("annualTaxes") double annualTaxes){
-			
-			AnnualTaxes taxes = new AnnualTaxes();
-			
-			if(location.equalsIgnoreCase("montreal west" )) {
-				taxes.setMontrealWest(annualTaxes);
-				return "Thank you for contributing to our database: " + location + " - $" + taxes.getMontrealWest() + " annual property taxes.";
-			}
-			
-			else if(location.equalsIgnoreCase("montreal east" )) {
-				taxes.setMontrealEast(annualTaxes);
-				return "Thank you for contributing to our database: "  + location + " - $" + taxes.getMontrealEast()+" annual property taxes.";
-			}
-				
-			else if(location.equalsIgnoreCase("montreal north" )) {
-				 taxes.setMontrealNorth(annualTaxes);
-				 return "Thank you for contributing to our database: "  + location + " - $" + taxes.getMontrealNorth()+" annual property taxes.";
-			}
-			else if(location.equalsIgnoreCase("vaudreuil" )) {
-				 taxes.setVaudreuil(annualTaxes);
-				 return "Thank you for contributing to our database: "  + location + " - $" + taxes.getVaudreuil()+" annual property taxes.";
-			}
-			
-			else if(location.equalsIgnoreCase("laval" )) {
-				 taxes.setLaval(annualTaxes);
-				 return "Thank you for contributing to our database: " + taxes.getLaval()+" annual property taxes.";
-			}
-			
-			return "Your area was not found in our database, please try again!";			 		 
-		}
+
 }
 
 		
