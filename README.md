@@ -33,16 +33,16 @@ This app was deployed locally using a Payara glassfish server 6 (6.2.3)<br/>
 
  <h3>System environment:</h3>
          
-          <p>        	
+                  	
           	I used Digital Ocean for my hosting services, unfortunately, they don't have the auto-deploy option for Java web apps so I had to do everything myself from the Ubuntu console which was great because 
           	I had the chance to practice my Linux skills :)
-          </p>
           
           
-          <p>
+          
+          
             More details:<br>
             The form data is sent to my HTTP endpoint, this HTTP GET method 
             connects to my Java class, and all calculations are done in that class. 
             Then the HTTP GET method fetches the final results from my Java Class and returns them to the client 
             in the form of HTML.
-          </p>
+          
