@@ -102,7 +102,7 @@ font-weight:bold;
 
 /* footer  */
 .bg-primary{
-	margin-top: 200px;
+	margin-top: 400px;
 }
 
 
