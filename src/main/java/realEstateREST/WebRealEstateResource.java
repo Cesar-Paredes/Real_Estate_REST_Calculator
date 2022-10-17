@@ -125,6 +125,10 @@ public class WebRealEstateResource {
 					  + "  font-weight: 500;\r\n"
 					  + "}"
 					  + "\r\n"
+					  +"/* footer  */\r\n"
+					  + ".bg-primary{\r\n"
+					  + "	margin-top: 200px;\r\n"
+					  + "}"
 					  + "</style>\r\n"
 					  
 					  

@@ -73,6 +73,7 @@ font-size:15px;}
 /* form button "calculate profit"  */
 .btn-lg{
   font-size: 20px;
+  
 }
 
 
@@ -94,6 +95,15 @@ font-size:15px;}
 font-weight:bold;
 }
 
+/* form  */
+.offset-xl-1{
+	
+}
+
+/* footer  */
+.bg-primary{
+	margin-top: 200px;
+}
 
 
 
@@ -172,9 +182,7 @@ font-weight:bold;
                  
           </div>
         </form>
-        <br>
-
-      
+        
       </div>
     </div>
   </div>
