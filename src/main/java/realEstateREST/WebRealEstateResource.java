@@ -127,7 +127,7 @@ public class WebRealEstateResource {
 					  + "\r\n"
 					  +"/* footer  */\r\n"
 					  + ".bg-primary{\r\n"
-					  + "	margin-top: 200px;\r\n"
+					  + "	margin-top: 600px;\r\n"
 					  + "}"
 					  + "</style>\r\n"
 					  
@@ -418,7 +418,7 @@ public class WebRealEstateResource {
 				 + "}\r\n"
 				 + "\r\n"
 				 + ".bg-primary{\r\n"
-				 + "  margin-top: 500px;\r\n"
+				 + "  margin-top: 650px;\r\n"
 				 + "}\r\n"
 				 + "\r\n"
 				 + "</style>\r\n"
