@@ -34,8 +34,7 @@ This app was deployed locally using a Payara glassfish server 6 (6.2.3)<br/>
  <h3>System environment:</h3>
  
  <p>        	
-          	I used Digital Ocean for my hosting services, unfortunately, they don't have the auto-deploy option for Java web apps so I had to do everything myself from the Ubuntu console which was great because 
-          	I had the chance to practice my Linux skills :)
+          	I used Digital Ocean for my hosting services, using Ubuntu linux console.
           </p>
           
   <p>
