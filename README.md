@@ -1,11 +1,7 @@
 # Real_Estate_REST_Calculator
 Java Web application using my own REST API (Web services)
 <br/>  
-++++++++++++++++++++++++++++++++
-<h3 align="left"> 🚀Live Project:🚀</h3>                                                       
-<p align="left">                                                                                                    
-<h2><a href="http://138.197.150.253:8080/RealEstateREST/RealEstateForm.jsp" target="_blank">Click here ---> Real Estate Calculator</a></h2> 
-<br/>                                                                                                                
+                                             
 ++++++++++++++++++++++++++++++++
 <br/>  
 
